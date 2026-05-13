@@ -19,4 +19,5 @@ public class PedidoDTO {
     private Integer cantidad;
     private String estado;
     private LocalDateTime fechaCreacion;
+    private Double total;
 }

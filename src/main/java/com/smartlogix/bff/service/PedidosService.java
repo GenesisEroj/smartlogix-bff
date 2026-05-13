@@ -28,7 +28,8 @@ public class PedidosService {
         return client.get()
                 .uri("/api/pedidos")
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<PedidoDTO>>() {})
+                .bodyToMono(new ParameterizedTypeReference<List<PedidoDTO>>() {
+                })
                 .block();
     }
 
@@ -50,9 +51,8 @@ public class PedidosService {
     }
 
     public PedidoDTO updateEstado(Long id, EstadoDTO estadoDTO) {
-        return client.patch()
-                .uri("/api/pedidos/{id}/estado", id)
-                .bodyValue(estadoDTO)
+        return client.put()
+                .uri("/api/pedidos/{id}/estado?estado={estado}", id, estadoDTO.getEstado())
                 .retrieve()
                 .bodyToMono(PedidoDTO.class)
                 .block();

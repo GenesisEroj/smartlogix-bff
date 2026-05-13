@@ -35,9 +35,9 @@ public class PedidosController {
                 .body(pedidosService.createPedido(dto));
     }
 
-    @PatchMapping("/{id}/estado")
+    @PutMapping("/{id}/estado")
     public ResponseEntity<PedidoDTO> updateEstado(@PathVariable Long id,
-                                                   @RequestBody EstadoDTO estadoDTO) {
+            @RequestBody EstadoDTO estadoDTO) {
         return ResponseEntity.ok(pedidosService.updateEstado(id, estadoDTO));
     }
 
