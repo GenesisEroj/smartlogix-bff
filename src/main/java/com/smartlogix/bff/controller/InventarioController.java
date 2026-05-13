@@ -36,7 +36,7 @@ public class InventarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductoDTO> updateProducto(@PathVariable Long id,
-                                                       @RequestBody ProductoDTO dto) {
+            @RequestBody ProductoDTO dto) {
         return ResponseEntity.ok(inventarioService.updateProducto(id, dto));
     }
 
