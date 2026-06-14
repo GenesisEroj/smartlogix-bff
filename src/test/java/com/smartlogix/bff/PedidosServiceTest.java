@@ -28,7 +28,7 @@ class PedidosServiceTest {
     private PedidosService pedidosService;
 
     private final PedidoDTO mockPedido = new PedidoDTO(
-            1L, "cliente-001", "PROD-001", 2, "PENDIENTE", null
+            1L, "cliente-001", "PROD-001", 2, "PENDIENTE", null, 0.0
     );
 
     @BeforeEach
@@ -68,13 +68,12 @@ class PedidosServiceTest {
     @Test
     void updateEstado_debeCambiarEstadoCorrectamente() {
         PedidoDTO enviado = new PedidoDTO(
-                1L, "cliente-001", "PROD-001", 2, "ENVIADO", null
+                1L, "cliente-001", "PROD-001", 2, "ENVIADO", null, 0.0
         );
 
-        when(webClient.patch()).thenReturn(requestBodyUriSpec);
+        when(webClient.put()).thenReturn(requestBodyUriSpec);
         when(requestBodyUriSpec.uri(anyString(), any(Object[].class))).thenReturn(requestBodySpec);
-        when(requestBodySpec.bodyValue(any())).thenReturn(requestHeadersSpec);
-        when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
+        when(requestBodySpec.retrieve()).thenReturn(responseSpec);
         when(responseSpec.bodyToMono(PedidoDTO.class)).thenReturn(Mono.just(enviado));
 
         PedidoDTO result = pedidosService.updateEstado(1L, new EstadoDTO("ENVIADO"));

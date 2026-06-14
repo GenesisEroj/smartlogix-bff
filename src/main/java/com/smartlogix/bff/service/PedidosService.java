@@ -52,7 +52,7 @@ public class PedidosService {
 
     public PedidoDTO updateEstado(Long id, EstadoDTO estadoDTO) {
         return client.put()
-                .uri("/api/pedidos/{id}/estado?estado={estado}", id, estadoDTO.getEstado())
+                .uri(u -> u.path("/api/pedidos/{id}/estado").queryParam("estado", estadoDTO.getEstado()).build(id))
                 .retrieve()
                 .bodyToMono(PedidoDTO.class)
                 .block();
